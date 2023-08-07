@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endnoting Experimental file</title>
+  <style>
+    body {
+      text-align: justify;
+      margin: 0;
+    }
+  
+    #container {
+      max-width: 800px;
+      margin: 100px auto 20px;
+      padding: 20px;
+    }
+  
+    h1 {
+      text-align: center;
+    }
+  
+    #ribbon {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: lightgrey;
+      padding: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+  
+    #search-bar-container {
+      position: fixed;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      background-color: yellow;
+      padding: 5px;
+      font-size: 12px;
+    }
+  
+    #navigation-buttons {
+      position: fixed;
+      top: 40px;
+      right: 5%;
+      background-color: #f1f1f1;
+      z-index: 1;
+    }
+  
+    /* Style for the links */
+    #navigation-buttons button,
+    .link-container a {
+      text-decoration: none;
+      font-size: small;
+    }
+  
+    #navigation-buttons button {
+      color: orangered;
+    }
+  
+    .link-container a {
+      color: red;
+      font-size: normal;
+    }
+  
+    .highlight {
+      background-color: yellow;
+    }
+  
+    #developedby {
+      font-style: italic;
+      color: brown;
+    }
+  
+    .link-container {
+      position: fixed;
+      bottom: 90%;
+      left: 0;
+      right: 0;
+      text-align: bottom;
+    }
+  
+    /* New styles for columns and paragraphs */
+    .row {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  
+    .column {
+      flex: 50%;
+      padding: 10px;
+      text-align: left;
+    }
+  
+    p,
+    .tab1,
+    .tab2 {
+      word-wrap: break-word;
+      text-indent: 20px;
+      padding-left: 20px;
+    }
+  
+    .tab1 {
+      padding-left: 20px;
+    }
+  
+    .tab2 {
+      padding-left: 40px;
+    }
+  
+    /* New styles for footer */
+    footer {
+      margin-top: 50px;
+      border-top: 1px solid silver;
+      font-size: 0.8em;
+    }
+  
+    footer ol {
+      padding-left: 20px;
+    }
+  
+    /** * Initialiazing a `footnotes` counter on the wrapper */
+    article {
+      counter-reset: footnotes;
+    }
+  
+    /** * Inline footnotes references * 1. Increment the counter at each new reference * 2. Reset link styles to make it appear like regular text */
+    [a-d="f-l"] {
+      counter-increment: footnotes;
+      /* 1 */
+      text-decoration: none;
+      /* 2 */
+      color: inherit;
+      /* 2 */
+      cursor: default;
+      /* 2 */
+      outline: none;
+      /* 2 */
+    }
+  
+    /** * Actual numbered references * 1. Display the current state of the counter (e.g. `[1]`) * 2. Align text as superscript * 3. Make the number smaller (since it's superscript) * 4. Slightly offset the number from the text * 5. Reset link styles on the number to show it's usable */
+    [a-d="f-l"]::after {
+      content: '[' counter(footnotes) ']';
+      /* 1 */
+      vertical-align: auto;
+      /* 2 */
+      font-size: 1em;
+      /* 3 */
+      margin-left: 2px;
+      /* 4 */
+      color: blue;
+      /* 5 */
+      text-decoration: underline;
+      /* 5 */
+      cursor: pointer;
+      /* 5 */
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+  
+    [a-d="f-l"]::after {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+  
+    /** * Resetting the default focused styles on the number */
+    [a-d="f-l"]:focus::after {
+      outline: thin dotted;
+      outline-offset: 2px;
+      color: brown;
+      font-weight: bold;
+    }
+  
+    [a-l="Back to content"] {
+      font-size: 1em;
+      color: darkblue;
+    }
+  
+    /** * Highlight target note */
+    footer :target {
+      background: lightgrey;
+    }
+  
+    /** * Visually hidden yet accessible content */
+    .p {
+      color: brown;
+      font-style: italic;
+    }
+    button.active {
+      background-color: green;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <!-- Ribbon with search bar and total results count -->
+  <div id="ribbon">
+    <b>Endnoting Experimental file</b>
+  </div>
+  <!-- Search bar and navigation buttons outside the ribbon -->
+  <div id="search-bar-container">
+    <input type="text" id="search-bar" placeholder="Enter your search query">
+    <span id="search-results-count"></span>
+    <div id="navigation-buttons">
+      <button id="previous-button" onclick="navigateToPreviousResult()">Previous</button>
+      <button id="next-button" onclick="navigateToNextResult()">Next</button>
+    </div>
+  </div>
+  <div id="container">
+  
+       <script>
+        //here pD means parking Data
+        var pxD = {
+          //this data helps in auto populating the input fields. This has been obtained by the help of var outputMessage function.
+          "a2": { idInput: "a2", g2I: "asymmetrical power", g3I: "" },
+          "123": { idInput: "123", g2I: "202308062217", g3I: "202308062216" },
+        };
+      </script>
+      <a id="TOP"></a>
+      <h3>
+        <center>
+          keyword collection <br>
+        </center>
+      </h3>
+      <a id="TOP"></a>
+      <label for="descriptionBox">Parking1:</label>
+      <textarea id="descriptionBox" placeholder="Park your text here"
+        style="background-color: lightgrey"> copy me</textarea><br><br>
+      <label for="descriptionBox">Parking2:</label>
+      <textarea id="descriptionBox" placeholder="Park your text here"
+        style="background-color: lightgrey"></textarea><br><br>
+      <label for="idInput"> <b>1.ID No:</b></label>
+      <input type="text" id="idInput" name="idInput" onkeyup="populateFields()" style="background-color: yellow" />
+      <!-- user has to add this id history manually. Note: This dropdown does not communicated with script -->
+      <select id="dxI">
+        <option value=""></option>
+        <option value="">a2</option>
+        <option value="">123</option>
+        <option value="">c</option>
+        <option value="">d</option>
+        <option value="">e</option>
+      </select><br>
+      <label for="gx2I"><b>2.fn1:</b></label>
+      <textarea id="gx2I" name="gx2I" style="width: 87%"></textarea><br>
+      <label for="gx3I"><b> 3.fn2</b></label>
+      <textarea id="gx3I" name="gx3I" style="width: 77%" placeholder=""></textarea><br>
+      <button onclick="generateOutput('output1')">Output 1</button>
+      <button onclick="generateOutput('output2')">Output 2</button>
+      <button onclick="generateOutput('output3')">Output 3</button>
+      <button onclick="displaystableOutput()">Output Stable</button>
+       <button onclick="copyMessage()">Copy 1</button>
+      <button onclick="copyOutput2()">Copy 2</button> <!-- Added "Copy 2" button -->
+      <button onclick="copyOutput3()">Copy 3</button>
+      <button onclick="copyAllOutputs()">Copy All</button>
+        <div id="output1" style="font-size: small"></div><br>
+        <div id="output2" style="font-size: small"></div><br>
+        <div id="output3" style="font-size: small"></div><br>
+        <div id="stableOutput"></div><br>
+    <script>
+      //auto populating input fields
+      function populateFields() {
+        var id = document.getElementById("idInput").value;
+        var gx2I = document.getElementById("gx2I");
+        var gx3I = document.getElementById("gx3I");
+        if (id in pxD) {
+          idInput.value = pxD[id].idInput;
+          gx2I.value = pxD[id].g2I.replace(/</g, "&#x003C;").replace(/>/g, "&#x003E;").replace(/&quot;/g, "&amp;quot;");
+          gx3I.value = pxD[id].g3I.replace(/</g, "&#x003C;").replace(/>/g, "&#x003E;").replace(/&quot;/g, "&amp;quot;");
+          idInput.style.backgroundColor = "yellow";
+        } else {
+          idInput.style.backgroundColor = "red";
+        }
+      }
+      //script for generating outputs
+      function generateOutput(outputType) {
+        var idInput = document.getElementById("idInput").value;
+        var gx2I = document.getElementById("gx2I").value;
+        var gx3I = document.getElementById("gx3I").value;
+        if (outputType === "output1") {
+          var outputMessage =
+            // output1 format
+            "<br><br>" +
+            "&quot;" + idInput + "&quot;" + ": " + "{" +
+            "idInput:" + "&quot;" + idInput + "&quot;" + "," +
+            "g2I:" + "&quot;" + gx2I + "&quot;" + "," +
+            "g3I:" + "&quot;" + gx3I + "&quot;" +
+            "}" + ",";
+          var outputDiv = document.getElementById("output1");
+        } else if (outputType === "output2") {
+          var outputMessage =
+            "<br><br> &#x3C;a href=&quot;&#35;fn" + gx2I + "&quot; a-d=&quot;f-l&quot; id=&quot;fn" + gx3I + "&quot;&#x3E&#x3C;/a&#x3E;";
+          var outputDiv = document.getElementById("output2");
+        } else if (outputType === "output3") {
+          var outputMessage =
+            "<br><br>&#x3C;li id=&quot;fn" + gx2I + "&quot;&#x3E;" + gx3I + "&#x3C;a href=&quot;" + gx3I + "&quot; target=&quot;_blank&quot;&#x3E;" + gx3I + "&#x3C;/a&#x3E; &#x3C;a href=&quot;#fn" + gx3I + "&quot; a-l=&quot;Back to content&quot;&#x3E;[&#x21A9;]&#x3C;/a&#x3E;&#x3C;/li&#x3E;";
+          var outputDiv = document.getElementById("output3");
+        }
+        outputDiv.innerHTML = outputMessage;
+      }
+      //this is to copy the outputMessage1 in the clipboard
+      //this will create the stable content in the webpage. you can remove this function if you desire not to obtain such content while loading the webpage.
+      function displaystableOutput() {
+        var stableOutputDiv = document.getElementById("stableOutput");
+        for (var id in pxD) {
+          var outputMessage = "<b>" + pxD[id].idInput + ". </b>" + "<b><u>Keywords: </b></u>" + pxD[id].g2I + "<br><br>" + "<b>" + pxD[id].idInput + ". </b>" + "<b><u>Notes:</b></u>" + pxD[id].g3I + "<br><br>";
+          var outputDiv = document.createElement("div");
+          outputDiv.innerHTML = outputMessage + "<br><br>";
+          stableOutputDiv.appendChild(outputDiv);
+        }
+      }
+      function copyMessage() {
+        var outputMessage = document.getElementById("output1").innerText;
+        navigator.clipboard.writeText(outputMessage).then(function () {
+          alert("Copied to clipboard!");
+        }).catch(function (error) {
+          console.error("Failed to copy to clipboard: ", error);
+        });
+      }
+      function copyOutput2() {
+        var outputMessage = document.getElementById("output2").innerText;
+        navigator.clipboard.writeText(outputMessage).then(function () {
+          alert("Output 2 Copied to clipboard!");
+        }).catch(function (error) {
+          console.error("Failed to copy Output 2 to clipboard: ", error);
+        });
+      }
+      function copyOutput3() {
+        var outputMessage = document.getElementById("output3").innerText;
+        navigator.clipboard.writeText(outputMessage).then(function () {
+          alert("Output 3 Copied to clipboard!");
+        }).catch(function (error) {
+          console.error("Failed to copy Output 3 to clipboard: ", error);
+        });
+      }
+      function copyAllOutputs() {
+        var output1Message = document.getElementById("output1").innerText;
+        var output2Message = document.getElementById("output2").innerText;
+        var output3Message = document.getElementById("output3").innerText;
+        var combinedOutput = output1Message + "\n\n" + output2Message + "\n\n" + output3Message;
+        navigator.clipboard.writeText(combinedOutput).then(function () {
+          alert("All Outputs Copied to clipboard!");
+        }).catch(function (error) {
+          console.error("Failed to copy both outputs to clipboard: ", error);
+        });
+      }
+      // Execute on page load
+      window.onload = function () {
+        populateFields();
+        
+      };
+      // script for copying dropdown option in clipboard through doublclick
+      var isDoubleClick = false;
+      function copyTextToClipboard(text) {
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        var alertElement = document.createElement("div");
+        alertElement.textContent = "Copied: " + text;
+        alertElement.classList.add("alert", "show");
+        document.body.appendChild(alertElement);
+        setTimeout(function () {
+          alertElement.classList.remove("show");
+          alertElement.classList.add("hide");
+          setTimeout(function () {
+            document.body.removeChild(alertElement);
+          }, 500);
+        }, 2000);
+      }
+      function copySelectedOption(dropdownId) {
+        if (isDoubleClick) {
+          var dropdown = document.getElementById(dropdownId);
+          var selectedOption = dropdown.options[dropdown.selectedIndex].text;
+          copyTextToClipboard(selectedOption.trim());
+        } else {
+          isDoubleClick = true;
+          setTimeout(function () {
+            isDoubleClick = false;
+          }, 300);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        var dropdowns = document.getElementsByTagName("select");
+        for (var i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].addEventListener("click", function () {
+            copySelectedOption(this.id);
+          });
+        }
+      });
+      //Using enter key etc. to enter #x003C;br&#x003E; etc. in input field
+      function addLineBreak(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            "&#x003C;br&#x003E;" +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 19, cursorPosition + 19);
+        }
+        if (event.key === "b" && event.ctrlKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            "&#x003C;b&#x003E;" +
+            "&#x003C;/b&#x003E;" +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 17, cursorPosition + 17);
+        }
+        if (event.key === "u" && event.ctrlKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            "&#x003C;u&#x003E;" +
+            "&#x003C;/u&#x003E;" +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 17, cursorPosition + 17);
+        }
+        if (event.key === "q" && event.ctrlKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            "&amp;quot; &amp;quot;" +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 11, cursorPosition + 11);
+        }
+        if (event.key === "l" && event.ctrlKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            "&#x2022;" +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 10, cursorPosition + 10);
+        }
+      }
+      var inputFields = document.querySelectorAll("input, textarea");
+      inputFields.forEach(function (input) {
+        input.addEventListener("keydown", addLineBreak);
+      });
+    </script>
+    <script>
+      var searchQuery = '';
+      var currentResultIndex = -1;
+      var searchResults = [];
+      function performSearch() {
+        searchQuery = document.getElementById('search-bar').value;
+        var contentElements = document.querySelectorAll("#container :not(script)");
+        // Clear previous highlighting and bold style
+        for (var i = 0; i < contentElements.length; i++) {
+          var element = contentElements[i];
+          element.innerHTML = element.textContent;
+          element.classList.remove("bold-search");
+        }
+        var countElement = document.getElementById('search-results-count');
+        var searchCount = 0;
+        // Perform search logic here...
+        // For this example, let's just highlight the search query
+        searchResults = [];
+        for (var i = 0; i < contentElements.length; i++) {
+          var element = contentElements[i];
+          var content = element.textContent;
+          var regex = new RegExp(searchQuery, 'gi');
+          var matches = content.match(regex);
+          if (matches) {
+            searchCount += matches.length;
+            var highlightedContent = content.replace(regex, '<span class="highlight">$&</span>');
+            element.innerHTML = highlightedContent;
+            // Save the search results for navigation
+            for (var j = 0; j < matches.length; j++) {
+              searchResults.push(element);
+            }
+          }
+        }
+        // Update the search results count
+        countElement.textContent = "Total Results: " + searchCount;
+        currentResultIndex = -1;
+      }
+      function navigateToNextResult() {
+        if (searchResults.length === 0) return;
+        if (currentResultIndex !== -1) {
+          searchResults[currentResultIndex].classList.remove("bold-search");
+        }
+        currentResultIndex = (currentResultIndex + 1) % searchResults.length;
+        updateNavigatedCount();
+        scrollToElement(searchResults[currentResultIndex]);
+        searchResults[currentResultIndex].classList.add("bold-search");
+      }
+      function navigateToPreviousResult() {
+        if (searchResults.length === 0) return;
+        if (currentResultIndex !== -1) {
+          searchResults[currentResultIndex].classList.remove("bold-search");
+        }
+        currentResultIndex = (currentResultIndex - 1 + searchResults.length) % searchResults.length;
+        updateNavigatedCount();
+        scrollToElement(searchResults[currentResultIndex]);
+        searchResults[currentResultIndex].classList.add("bold-search");
+      }
+      function updateNavigatedCount() {
+        var countElement = document.getElementById('search-results-count');
+        if (searchResults.length === 0) {
+          countElement.textContent = "Total Results: 0";
+        } else {
+          var navigated = currentResultIndex + 1;
+          countElement.textContent = "Navigated Result: " + navigated + " out of " + searchResults.length;
+        }
+      }
+      function scrollToElement(element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Attach event listener to the search bar
+      var searchBar = document.getElementById('search-bar');
+      searchBar.addEventListener('input', performSearch);
+    </script>
+    <script>
+      //inserting date&time in input using Ctrl+d+t
+      function insertDateTime(event) {
+        if (event.key === "t" && event.ctrlKey && event.altKey) {
+          event.preventDefault();
+          var input = event.target;
+          var cursorPosition = input.selectionStart;
+          var currentDate = new Date();
+          var year = currentDate.getFullYear().toString().padStart(4, "0");
+          var month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+          var date = currentDate.getDate().toString().padStart(2, "0");
+          var hours = currentDate.getHours().toString().padStart(2, "0");
+          var minutes = currentDate.getMinutes().toString().padStart(2, "0");
+          var dateTimeString = year + month + date + hours + minutes;
+          var currentValue = input.value;
+          var newValue =
+            currentValue.substring(0, cursorPosition) +
+            dateTimeString +
+            currentValue.substring(cursorPosition);
+          input.value = newValue;
+          input.setSelectionRange(cursorPosition + 12, cursorPosition + 12);
+        }
+      }
+      // Add event listener to input fields for Ctrl + D + T shortcut
+      var inputFields = document.querySelectorAll("input, textarea");
+      inputFields.forEach(function (input) {
+        input.addEventListener("keydown", insertDateTime);
+      });
+      //for input field fn2 (gx3I) to be filled automatically
+      function updateFn2() {
+        var fn1Value = document.getElementById("gx2I").value;
+        var fn2Field = document.getElementById("gx3I");
+        if (fn1Value !== "") {
+          // Convert the value to a number and set "fn2" accordingly
+          var fn1Number = parseFloat(fn1Value);
+          fn2Field.value = (fn1Number - 1).toString();
+        } else {
+          fn2Field.value = "";
+        }
+      }
+      // Execute updateFn2 function whenever the user types in the "fn1" field
+      document.getElementById("gx2I").addEventListener("keyup", updateFn2);
+    
+    </script>
+   <article>
+    <p>This is shiva.<a href="#fn202308062217" a-d="f-l" id="fn202308062216"></a>Continue the content.</p>
+  </article>
+<a id="BOTTOM"></a>
+<footer>
+  <h2 class="visually-hidden" id="f-l">Endnotes</h2>
+  <ol>
+    <li id="fn202308062217">202308062216<a href="202308062216" target="_blank">202308062216</a> <a
+        href="#fn202308062216" a-l="Back to content">[↩]</a></li>
+  </ol>
+  <div class="link-container">
+    <a href="#TOP">&#x25B2;</a>
+    <a href="#MIDDLE">X&#772;</a>
+    <a href="#BOTTOM">&#x25BC;</a>
+  </div>
+  <p id="developedby"><u><b>Developed By:</b></u><br> Shiva Prasad Acharya (M.Sc.; LL.M)<br>
+    Shiva.Acharya@supremecourt.gov.np <br>
+  </p>
+</footer>
+</body>
+</html>
